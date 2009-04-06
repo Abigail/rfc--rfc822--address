@@ -1,9 +1,15 @@
 package RFC::RFC822::Address;
 
 #
-# $Id: Address.pm,v 1.4 1999/10/04 09:12:58 abigail Exp abigail $
+# $Id: Address.pm,v 1.5 2000/08/29 22:15:01 abigail Exp abigail $
 #
 # $Log: Address.pm,v $
+# Revision 1.5  2000/08/29 22:15:01  abigail
+# Changed group rule to make <leftop> part greedy.
+#   (Damian Conway/Douglas Wilson)
+# Added a test; removed $DEBUG part, now prints message on failures.
+# Changed wording of license (using BSD/X style).
+#
 # Revision 1.4  1999/10/04 09:12:58  abigail
 # Fixed typo in pod.
 #
@@ -36,7 +42,7 @@ use vars qw /@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $VERSION/;
 @EXPORT_OK   = qw /valid/;
 %EXPORT_TAGS = ();
 
-($VERSION)   = '$Revision: 1.4 $' =~ /([\d.]+)/;
+($VERSION)   = '$Revision: 1.5 $' =~ /([\d.]+)/;
 
 my $CRLF     = '\x0D\x0A';
 $Parse::RecDescent::skip = "((?:$CRLF)?[ \t])*";
@@ -102,6 +108,12 @@ This module is slow.
 =head1 REVISION HISTORY
 
     $Log: Address.pm,v $
+    Revision 1.5  2000/08/29 22:15:01  abigail
+    Changed group rule to make <leftop> part greedy.
+      (Damian Conway/Douglas Wilson)
+    Added a test; removed $DEBUG part, now prints message on failures.
+    Changed wording of license (using BSD/X style).
+
     Revision 1.4  1999/10/04 09:12:58  abigail
     Fixed typo in pod.
 
@@ -124,15 +136,29 @@ This module is slow.
 
 =head1 AUTHOR
 
-This package was written by Abigail, abigail@delanet.com.
+This package was written by Abigail, abigail@foad.org.
 
 =head1 COPYRIGHT and LICENSE
 
-This package is copyright 1999 by Abigail.
+This program is copyright 1999, 2000 by Abigail.
 
-This program is free and open software. You may use, copy, modify,
-distribute and sell this program (and any modified variants) in any way
-you wish, provided you do not restrict others to do the same.
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+ 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
+OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 =cut
 
@@ -198,7 +224,7 @@ address:      mailbox                            # one addressee
            |  group                              # named list
 
 group:        phrase ocms ':' ocms
-              <leftop: mailbox (ocms ',' ocms) mailbox>(?)
+              <leftop: mailbox (ocms ',' ocms) mailbox>(s?)
               ocms ';'
 
 mailbox:      addr_spec                          # simple address

@@ -8,13 +8,13 @@
 
 use strict;
 my $loaded;
-BEGIN { $| = 1; print "1..67\n"; }
+BEGIN { $| = 1; print "1..68\n"; }
 END {print "not ok 1\n" unless $loaded;}
 use RFC::RFC822::Address qw /valid/;
 $loaded = 1;
 print "ok   1\n";
 
-my $DEBUG = 1 if grep {$_ eq '--debug'} @ARGV;
+# my $DEBUG = 1 if grep {$_ eq '--debug'} @ARGV;
 
 ######################### End of black magic.
 
@@ -95,6 +95,7 @@ abigail@[exa[ple.com]
 abigail@[exaple].com]
 abigail@
 @example.com
+phrase: abigail@example.com abigail@example.com ;
 INVALIDS
 
 push @invalids =>
@@ -114,15 +115,17 @@ push @invalids =>
 my $c = 1;
 foreach my $test (@valids) {
     my $d = sprintf "%3d" => ++ $c;
-    print valid ($test) ? "ok $d" : "not ok $d";
-    print " [  VALID: $test] " if $DEBUG;
+    my $valid = valid ($test);
+    print $valid ? "ok $d" : "not ok $d";
+    print "#  [VALID: $test] " unless $valid;
     print "\n";
 }
 
 foreach my $test (@invalids) {
     my $d = sprintf "%3d" => ++ $c;
-    print valid ($test) ? "not ok $d" : "ok $d";
-    print " [INVALID: $test] " if $DEBUG;
+    my $valid = valid ($test);
+    print $valid ? "not ok $d" : "ok $d";
+    print "#  [INVALID: $test] " if $valid;
     print "\n";
 }
 
