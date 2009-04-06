@@ -1,48 +1,19 @@
 package RFC::RFC822::Address;
 
-#
-# $Id: Address.pm,v 1.5 2000/08/29 22:15:01 abigail Exp abigail $
-#
-# $Log: Address.pm,v $
-# Revision 1.5  2000/08/29 22:15:01  abigail
-# Changed group rule to make <leftop> part greedy.
-#   (Damian Conway/Douglas Wilson)
-# Added a test; removed $DEBUG part, now prints message on failures.
-# Changed wording of license (using BSD/X style).
-#
-# Revision 1.4  1999/10/04 09:12:58  abigail
-# Fixed typo in pod.
-#
-# Revision 1.3  1999/10/04 09:07:23  abigail
-# Parsing of comments.
-# Completed (?) test suite. Added --debug option to test.pl, to print
-#    what was being matched, and what the result of validation was.
-# Changed package name to RFC::RFC822::Address, to cope for 5.004 users;
-#    MacPerl is still on 5.004.
-#
-# Revision 1.2  1999/10/02 10:08:48  abigail
-# Grammar is now aware of the whitespace rules.
-# Comment rules still have to be implemented.
-# used h2xs.
-# Created initial test.pl file.
-#
-# Revision 1.1  1999/10/01 08:50:13  abigail
-# Initial revision
-#
-#
+require 5.006;
 
 use strict;
-use Exporter;
+use warnings;
+no  warnings 'syntax';
+use Exporter ();
 use Parse::RecDescent;
 
-use vars qw /@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $VERSION/;
+our @ISA         = qw /Exporter/;
+our @EXPORT      = qw //;
+our @EXPORT_OK   = qw /valid/;
+our %EXPORT_TAGS = ();
 
-@ISA         = qw /Exporter/;
-@EXPORT      = qw //;
-@EXPORT_OK   = qw /valid/;
-%EXPORT_TAGS = ();
-
-($VERSION)   = '$Revision: 1.5 $' =~ /([\d.]+)/;
+our $VERSION     = '2009040601';
 
 my $CRLF     = '\x0D\x0A';
 $Parse::RecDescent::skip = "((?:$CRLF)?[ \t])*";
@@ -55,7 +26,7 @@ sub valid ($) {$parser -> valid (shift)}
 
 # That's it. The rest is just data....
 
-<<'=cut'
+1;
 
 =pod
 
@@ -105,42 +76,18 @@ MacPerl is still at 5.004.
 
 This module is slow.
 
-=head1 REVISION HISTORY
-
-    $Log: Address.pm,v $
-    Revision 1.5  2000/08/29 22:15:01  abigail
-    Changed group rule to make <leftop> part greedy.
-      (Damian Conway/Douglas Wilson)
-    Added a test; removed $DEBUG part, now prints message on failures.
-    Changed wording of license (using BSD/X style).
-
-    Revision 1.4  1999/10/04 09:12:58  abigail
-    Fixed typo in pod.
-
-    Revision 1.3  1999/10/04 09:07:23  abigail
-    Parsing of comments.
-    Completed (?) test suite. Added --debug option to test.pl, to print
-       what was being matched, and what the result of validation was.
-    Changed package name to RFC::RFC822::Address, to cope for 5.004 users;
-       MacPerl is still on 5.004.
-
-    Revision 1.2  1999/10/02 10:08:48  abigail
-    Grammar is now aware of the whitespace rules.
-    Comment rules still have to be implemented.
-    used h2xs.
-    Created initial test.pl file.
-
-    Revision 1.1  1999/10/01 08:50:13  abigail
-    Initial revision
-
+=head1 DEVELOPMENT
+ 
+The current sources of this module are found on github,
+L<< git://github.com/Abigail/rfc--rfc822--address.git >>.
 
 =head1 AUTHOR
 
-This package was written by Abigail, abigail@foad.org.
+Abigail L<< mailto:cpan@abigail.be >>.
 
 =head1 COPYRIGHT and LICENSE
 
-This program is copyright 1999, 2000 by Abigail.
+This program is copyright 1999, 2000, 2009 by Abigail.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
