@@ -1,4 +1,4 @@
-Address.pm
+lib/RFC/RFC822/Address.pm
 MANIFEST
 Makefile.PL
-test.pl
+t/000_tests.t
