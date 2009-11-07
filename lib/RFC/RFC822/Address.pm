@@ -32,7 +32,7 @@ sub valid ($) {$parser -> valid (shift)}
 
 =head1 NAME
 
-RFC::RFC822::Address  --  RFC 822 style address validation.
+RFC::RFC822::Address - RFC 822 style address validation.
 
 =head1 SYNOPSIS
 
