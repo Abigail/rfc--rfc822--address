@@ -1,5 +1,6 @@
 Version 2009110701
 - Modernized Makefile.PL
+- Added POD and Kwalitee tests
 ----
 Version 2009040601
 - Moved to git and github.
