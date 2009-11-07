@@ -6,7 +6,14 @@
 # Change 1..1 below to 1..last_test_to_print .
 # (It may become useful if the test is moved to ./t subdirectory.)
 
+BEGIN {
+   $^W = 0;
+}
+
 use strict;
+use warnings;
+no  warnings 'syntax';
+
 my $loaded;
 BEGIN { $| = 1; print "1..68\n"; }
 END {print "not ok 1\n" unless $loaded;}
