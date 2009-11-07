@@ -13,7 +13,7 @@ our @EXPORT      = qw //;
 our @EXPORT_OK   = qw /valid/;
 our %EXPORT_TAGS = ();
 
-our $VERSION     = '2009110701';
+our $VERSION     = '2009110702';
 
 my $CRLF     = '\x0D\x0A';
 $Parse::RecDescent::skip = "((?:$CRLF)?[ \t])*";

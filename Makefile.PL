@@ -25,7 +25,8 @@ my %args = (
     VERSION_FROM         => $LIB_FILE,
     ABSTRACT_FROM        => $LIB_FILE,
     PREREQ_PM            => {
-        'Lingua::EN::Numbers'   => 1.01,
+        'Exporter'              => 0,
+        'Parse::RecDescent'     => 0,
         'warnings'              => 0,
         'strict'                => 0,
     },

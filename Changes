@@ -1,4 +1,7 @@
 Version 2009110701
+- Fix prerequisites.
+----
+Version 2009110701
 - Modernized Makefile.PL
 - Added POD and Kwalitee tests
 ----
